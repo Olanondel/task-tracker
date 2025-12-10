@@ -10,21 +10,23 @@
     "type": "git",
     "url": "git+https://github.com/Olanondel/task-tracker.git"
   },
-  "license": "ISC",
-  "author": "Oleh Parshehuba",
-  "type": "commonjs",
-  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts"
+    "start": "dotenv -- ts-node src/index.ts",
+    "dev": "dotenv -- nodemon src/index.ts"
   },
+  "license": "ISC",
+  "author": "Oleh Parshehuba",
+  "type": "module",
+  "main": "src/index.js",
   "dependencies": {
     "express": "^5.2.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "dotenv-cli": "^11.0.0",
     "nodemon": "^3.1.11",
+    "prettier": "^3.7.4",
     "typescript": "^5.9.3"
   }
 }
