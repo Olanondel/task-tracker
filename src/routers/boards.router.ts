@@ -1,11 +1,16 @@
 import express from 'express';
 
 import type { Response, Request } from 'express';
-import type { Board, GetBoardsResponse } from '../types/boards/index.ts';
+import type {
+  Board,
+  CreateBoardRequest,
+  GetBoardResponse,
+  GetBoardsResponse,
+  PutBoardRequest,
+} from '../types/boards/index.ts';
 import type { BoardIdParams } from '../types/common/index.ts';
 
 import { randomUUID } from 'node:crypto';
-import type { PutBoardRequest } from '../types/boards/put-board-request.ts';
 import {
   createBoard,
   deleteBoard,
@@ -13,7 +18,6 @@ import {
   getOneBoard,
   updateBoard,
 } from '../database/boards-repository.ts';
-import type { CreateBoardRequest } from '../types/boards/create-board-request.ts';
 import { validateBoardInput } from '../validation/index.ts';
 
 export const boardsRouter = express.Router();
@@ -29,7 +33,10 @@ boardsRouter.get(
 
 boardsRouter.get(
   '/:boardId',
-  async (request: Request<BoardIdParams>, response: Response<Board>) => {
+  async (
+    request: Request<BoardIdParams, GetBoardResponse>,
+    response: Response<Board>,
+  ) => {
     const board = await getOneBoard(request.params.boardId);
 
     response.status(200).send(board);

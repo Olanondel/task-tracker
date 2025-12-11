@@ -44,14 +44,15 @@ export const sqliteGet = (
   });
 };
 
-export const sqliteAll = (
+export const sqliteAll = <T = unknown>(
   sql: string,
   params?: unknown[],
-): Promise<unknown> => {
+): Promise<T[]> => {
   return new Promise((resolve, reject) => {
-    db.all(sql, params, (error: unknown, data: unknown) => {
+    db.all(sql, params, (error: unknown, data: T[]) => {
       if (error) {
         reject(error);
+        return;
       }
 
       resolve(data);
